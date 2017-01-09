@@ -1,4 +1,4 @@
-" vimrc
+" vimrc (unix/win32)
 " kjk@rhcdc
 
 
@@ -8,8 +8,13 @@
 set nocompatible
 filetype off
 
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if has("unix")
+  set runtimepath+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+elseif has("win32")
+  set runtimepath+=$HOME/vimfiles/bundle/Vundle.vim
+  call vundle#begin('$USERPROFILE/vimfiles/bundle')
+endif
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'iamcco/markdown-preview.vim'
@@ -22,9 +27,12 @@ Plugin 'scrooloose/nerdcommenter'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-
 " ycm
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+if has("unix")
+  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+elseif has("win32")
+  let g:ycm_global_ycm_extra_conf = '$HOME/vimfiles/.ycm_extra_conf.py'
+endif
 
 
 " indent guides
@@ -43,13 +51,17 @@ let g:mkdp_auto_close = 0
 
 
 " GENERAL " {{{
-" set path for viminfo file
-set viminfo+=n~/.vim/viminfo
+" viminfo path
+if has("unix")
+  set viminfo+=n~/.vim/viminfo
+elseif has("win32")
+  set viminfo+=n$HOME/vimfiles/viminfo
+endif
 
 " remove splash screen
 set shortmess+=I
 
-" reinforce backspace
+" fix backspace
 set backspace=indent,eol,start
 
 " case-insensitive
@@ -58,10 +70,10 @@ set ignorecase
 " wildmenu on
 set wildmenu
 
-" global indent
+" global indention
 set tabstop=8
-set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 set smartindent
 
@@ -75,7 +87,13 @@ set t_vb=
 " UI " {{{
 syntax enable
 syntax on
-colorscheme molokai
+
+if has("gui_win32")
+  colorscheme molokai
+else
+  colorscheme desert
+end
+
 set cursorline
 set hlsearch
 set incsearch
@@ -86,7 +104,7 @@ set textwidth=78
 
 " tabline
 set showtabline=2
-highlight TabLineFill ctermfg=DarkGrey guifg=Black 
+highlight TabLineFill ctermfg=DarkGrey guifg=DarkGrey 
 
 " statusline
 set laststatus=2
@@ -103,7 +121,7 @@ set statusline+=\ \ \
 set statusline+=%%%-3p
 
 " 80th char indicator
-highlight ColorColumn term=reverse ctermbg=Black guibg=DarkGrey
+highlight ColorColumn term=reverse ctermbg=Black guibg=Black
 set colorcolumn=80
 " " }}}
 
@@ -123,13 +141,21 @@ nnoremap <silent> <leader><leader>w :set wrap!<CR>
 " highway to $MYVIMRC
 nnoremap <leader>s :source $MYVIMRC<CR>
 nnoremap <leader>e :tabnew $MYVIMRC<CR>
+if has("gui")
+  nnoremap <leader><leader>s :source $MYGVIMRC<CR>
+  nnoremap <leader><leader>e :tabnew $MYGVIMRC<CR>
+endif
 
 " clean search highlights before redraw
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " time stamp settings
 " set timestamp language
-language time en_US.utf8
+if has("unix")
+  language time en_US.utf8
+elseif has("win32")
+  language time English_United States.1252
+endif
 " format: year-mon-day HH:MM:SS +/-hhmm
 nnoremap <F3> i<c-r>=strftime("%Y-%m-%d %T %z")<CR><Esc>
 inoremap <F3> <c-r>=strftime("%Y-%m-%d %T %z")<CR>
@@ -145,6 +171,6 @@ inoremap <F3> <c-r>=strftime("%Y-%m-%d %T %z")<CR>
 augroup vimscript
   au!
   " auto-reload vimrc after writen
-  au BufWritePost $MYVIMRC source $MYVIMRC
+  au BufWritePost $MYVIMRC source $MYVIMRC    
 augroup END
 " " }}}
