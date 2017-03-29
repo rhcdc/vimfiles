@@ -33,7 +33,9 @@ if has("unix")
 elseif has("win32")
   let g:ycm_global_ycm_extra_conf = '$HOME/vimfiles/.ycm_extra_conf.py'
 endif
-
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " indent guides
 let g:indent_guides_enable_on_vim_startup=1
