@@ -12,33 +12,36 @@ if has("unix")
   set runtimepath+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
 elseif has("win32")
-  set runtimepath+=$HOME/vimfiles/bundle/Vundle.vim
-  call vundle#begin('$USERPROFILE/vimfiles/bundle')
+  set runtimepath+=$HOME/vimfiles/bundle/Vundle.vim/
+  call vundle#begin('$HOME/vimfiles/bundle')
 endif
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'iamcco/markdown-preview.vim'
-Plugin 'iamcco/mathjax-support-for-mkdp'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-surround'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
+"Plugin 'iamcco/markdown-preview.vim'
+"Plugin 'iamcco/mathjax-support-for-mkdp'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " ycm
+set completeopt=longest,menu
+
 if has("unix")
-  let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+  let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 elseif has("win32")
-  let g:ycm_global_ycm_extra_conf = '$HOME/vimfiles/.ycm_extra_conf.py'
+  let g:ycm_global_ycm_extra_conf='$HOME/vimfiles/.ycm_extra_conf.py'
 endif
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_enable_diagnostic_signs=0
+let g:ycm_autoclose_preview_window_after_insertion=1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_use_ultisnips_completer=1
 
 " indent guides
-let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors=0
@@ -47,7 +50,8 @@ au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey
 
 
 " markdown-preview
-let g:mkdp_auto_close = 0
+let g:mkdp_auto_close=0
+let g:mkdp_path_to_chrome='chrome'
 " " }}}
 
 
@@ -82,6 +86,9 @@ set smartindent
 " silent the bell/vbell
 set visualbell
 set t_vb=
+
+" encoding
+set encoding=utf-8
 " " }}}
 
 
@@ -156,13 +163,15 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 if has("unix")
   language time en_US.utf8
 elseif has("win32")
+  "language time English_United States.1252
   language time English_United States.1252
 endif
+
 " format: year-mon-day HH:MM:SS +/-hhmm
-nnoremap <F3> i<c-r>=strftime("%Y-%m-%d %T %z")<CR><Esc>
-inoremap <F3> <c-r>=strftime("%Y-%m-%d %T %z")<CR>
+nnoremap <F3> a<c-r>=strftime("%Y-%m-%d %H:%M:%S %z")<CR><Esc>
+inoremap <F3> <c-r>=strftime("%Y-%m-%d %H:%M:%S %z")<CR>
 " format: long 
-"nnoremap <F3> i<c-r>=strftime("%c")<CR><Esc>
+"nnoremap <F3> a<c-r>=strftime("%c")<CR><Esc>
 "inoremap <F3> <c-r>=strftime("%c")<CR>
 " " }}}
 

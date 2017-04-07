@@ -12,3 +12,4 @@
 
 " keymappings
 nnoremap <buffer> <F5> :call ExComplierGpp()<CR>
+nnoremap <buffer> <F6> :call ExComplierGpp11()<CR>
