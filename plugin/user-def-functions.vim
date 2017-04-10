@@ -2,21 +2,28 @@
 func! ExComplierGcc()
   exec "w"
   exec "!gcc -Wall % -o %<"
-  exec "! ./%<"
+  exec "! %<"
 endfunc
 
 " gcc then gdb
 func! ExComplierGccDB()
   exec "w"
   exec "!gcc -Wall -g % -o %<-db"
-  exec "!gdb ./%<-db"
+  exec "!gdb %<-db"
 endfunc
 
 " g++
 func! ExComplierGpp()
   exec "w"
   exec "!g++ % -o %<"
-  exec "! ./%<"
+  exec "! %<"
+endfunc
+
+" g++: c++ 11 version
+func! ExComplierGpp11()
+  exec "w"
+  exec "!g++ -std=c++11 % -o %<"
+  exec "! %<"
 endfunc
 
 " latex preview
