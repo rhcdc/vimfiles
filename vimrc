@@ -36,7 +36,7 @@ endif
 
 
 " indent guides
-let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors=0
@@ -74,7 +74,7 @@ set wildmenu
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+set noexpandtab
 set smartindent
 
 " silent the bell/vbell

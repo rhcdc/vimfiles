@@ -26,8 +26,19 @@ func! LatexPreview()
 endfunc
 
 " pdflatex output to ./output~
+for possible_viewer in [
+      \ 'evince',
+      \ 'okular',
+      \ 'SumatraPDF' ]
+  if executable(possible_viewer)
+    let s:pdfviewer = possible_viewer
+    break
+  endif
+endfor
+
 func! LatexOuput()
   exec "w"
   exec "!mkdir output~"
-  exec "!pdflatex -output-directory=output~/ % && evince ./output~/%:.:r.pdf"
+  exec "!pdflatex -output-directory=output~/ %"
+  exec "!".s:pdfviewer." ./output~/".expand("%:t:r").".pdf"
 endfunc

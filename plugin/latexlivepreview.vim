@@ -157,9 +157,11 @@ EEOOFF
     if exists('g:livepreview_previewer')
         let s:previewer = g:livepreview_previewer
     else
+        " rhcdc: manually add a viewer
         for possible_previewer in [
                     \ 'evince',
-                    \ 'okular']
+                    \ 'okular',
+                    \ 'SumatraPDF' ]
             if executable(possible_previewer)
                 let s:previewer = possible_previewer
                 break
