@@ -11,5 +11,5 @@
 "setlocal cindent
 
 " keymappings
-nnoremap <buffer> <F5> :call ExComplierGcc()<CR>
-nnoremap <buffer> <F6> :call ExComplierGccDB()<CR>
+nnoremap <silent> <buffer> <F5> :call ExComplierGcc()<CR>
+nnoremap <silent> <buffer> <F6> :call ExComplierGccDB()<CR>

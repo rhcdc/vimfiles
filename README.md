@@ -5,7 +5,7 @@ So...here is a place to pile the vimfiles stuff, wish I could keep it clean
 
 # 
 ### TODO
-- [ ] fix time stamp language on windows
-- [ ] fix ycm clang semantic complete on windows
+- [x] fix ycm clang semantic complete on windows
+- [x] latex preview on windows
 - [ ] markdown preview on windows
-- [ ] latex preview on windows
+- [ ] fix time stamp language on windows
