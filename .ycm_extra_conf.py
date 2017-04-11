@@ -47,9 +47,7 @@ flags = [
 'c++',
 # using mingw on win
 '-isystem',
-'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include',
-'-isystem',
-'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include\\sys',
+'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Tools\\MSVC\\14.10.25017\\include',
 '-isystem',
 'C:\\Program Files\\mingw\\include\\c++\\6.3.0',
 '-isystem',
@@ -57,9 +55,15 @@ flags = [
 '-isystem',
 'C:\\Program Files\\mingw\\include\\c++\\6.3.0\\tr1',
 '-isystem',
+'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0',
+'-isystem',
 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include',
 '-isystem',
 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include\\ssp',
+'-isystem',
+'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include',
+'-isystem',
+'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include\\sys',
 ]
 
 

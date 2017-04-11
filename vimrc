@@ -112,7 +112,7 @@ set incsearch
 set number
 set showcmd
 set nowrap
-"set textwidth=78
+set textwidth=78
 
 " tabline
 set showtabline=2
