@@ -20,8 +20,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'iamcco/markdown-preview.vim'
-"Plugin 'iamcco/mathjax-support-for-mkdp'
+Plugin 'iamcco/markdown-preview.vim'
+Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
