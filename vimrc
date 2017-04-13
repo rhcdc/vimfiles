@@ -29,6 +29,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-scripts/winmanager'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -58,6 +59,10 @@ au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey
 let g:mkdp_auto_close=0
 " need chrome in PATH for win-os
 let g:mkdp_path_to_chrome='chrome'
+
+" winmanager
+let g:winManagerWindowLayout='FileExplorer'
+let g:winManagerWidth=35
 " " }}}
 
 
@@ -181,6 +186,13 @@ inoremap <F3> <c-r>=strftime("%Y-%m-%d %H:%M:%S %z")<CR>
 " ycm short-cut
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+
+" winmanager short-cut
+command! WMToggle call WMToggle()
+nnoremap <leader>wm :WMToggle<CR>
+nnoremap <leader>wf :FirstExplorerWindow<CR>
+nnoremap <leader>wb :BottomExplorerWindow<CR>
+nnoremap <F4> :call CurrentFileWMToggle()<CR>
 " " }}}
 
 
@@ -193,3 +205,10 @@ augroup vimscript
   au BufWritePost $MYVIMRC source $MYVIMRC    
 augroup END
 " " }}}
+
+
+
+
+
+
+

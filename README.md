@@ -6,6 +6,7 @@ So...here is a place to pile the vimfiles stuff, wish I could keep it clean
 
 # 
 ### TODO
+- [x] tweak winmanager (still including some brutal-force)
 - [ ] fix ycm clang semantic complete on windows
   - [x] c-lang semantic complete 
   - [x] when comes to stl objects, still has problem: there is headers, but

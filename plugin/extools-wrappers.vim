@@ -86,3 +86,37 @@ func! LatexOuput()
   endif
 endfunc
 " " }}}
+
+
+
+" winmanager custom-settings " {{{
+" intercept 'WMToggle' command
+function! WMToggle()
+  if !exists("t:wm_switch")
+    let t:wm_switch=0
+  endif
+  if t:wm_switch == 1
+    exec "normal! :WMClose\<CR>"
+  elseif t:wm_switch == 0
+    exec "normal! :WManager\<CR>"
+  endif
+  let t:wm_switch=!t:wm_switch
+endfunction
+
+" open current file's directory in file explorer
+function! CurrentFileWMToggle()
+  if !exists("t:wm_switch")
+    let t:wm_switch=0
+  endif
+  if t:wm_switch == 0
+    let a:save_work_dir=getcwd()
+    let a:cur_file_dir=expand("%:p:h")
+    exec "normal! :WMToggle\<CR>\:FirstExplorerWindow\<CR>"
+    exec "lcd ".a:cur_file_dir
+    exec "normal C"
+    exec "lcd ".a:save_work_dir
+  elseif t:wm_switch == 1
+    exec "normal! :WMToggle\<CR>"
+  endif
+endfunction
+" " }}}
