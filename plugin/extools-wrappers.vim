@@ -1,7 +1,7 @@
 " extools and wrappers, need tidying
 
 " kjk@rhcdc 
-" 2017-04-10 16:24:01 +0800
+" 2017-04-13 22:50:21 +0800
 
 
 
@@ -89,34 +89,21 @@ endfunc
 
 
 
-" winmanager custom-settings " {{{
-" intercept 'WMToggle' command
-function! WMToggle()
-  if !exists("t:wm_switch")
-    let t:wm_switch=0
-  endif
-  if t:wm_switch == 1
-    exec "normal! :WMClose\<CR>"
-  elseif t:wm_switch == 0
-    exec "normal! :WManager\<CR>"
-  endif
-  let t:wm_switch=!t:wm_switch
-endfunction
+" winmanager wrapper " {{{
+" just want to enable wmanager to load current file's dir
+" into the file explorer, brutal force used here... directly
+" use the function from winmanager.vim
 
-" open current file's directory in file explorer
-function! CurrentFileWMToggle()
-  if !exists("t:wm_switch")
-    let t:wm_switch=0
-  endif
-  if t:wm_switch == 0
-    let a:save_work_dir=getcwd()
+function! CurrentFileDirWMToggle()
+  if IsWinManagerVisible()
+    exec "normal! :WMToggle\<CR>"
+  else
+    let a:save_cwd=getcwd()
     let a:cur_file_dir=expand("%:p:h")
-    exec "normal! :WMToggle\<CR>\:FirstExplorerWindow\<CR>"
+    silent exec "normal! :WMToggle\<CR>\:FirstExplorerWindow\<CR>"
     exec "lcd ".a:cur_file_dir
     exec "normal C"
-    exec "lcd ".a:save_work_dir
-  elseif t:wm_switch == 1
-    exec "normal! :WMToggle\<CR>"
+    exec "lcd ".a:save_cwd
   endif
 endfunction
 " " }}}

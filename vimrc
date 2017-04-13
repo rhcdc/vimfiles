@@ -3,7 +3,7 @@
 
 
 
-" testing " {{{ 
+" TESTING " {{{ 
 if has("unix")
   let g:path_to_dotfiles='~/.vim'
 elseif has("win32")
@@ -188,11 +188,11 @@ nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 
 " winmanager short-cut
-command! WMToggle call WMToggle()
+"command! WMToggle call WMToggle()
 nnoremap <leader>wm :WMToggle<CR>
 nnoremap <leader>wf :FirstExplorerWindow<CR>
 nnoremap <leader>wb :BottomExplorerWindow<CR>
-nnoremap <F4> :call CurrentFileWMToggle()<CR>
+nnoremap <F4> :call CurrentFileDirWMToggle()<CR>
 " " }}}
 
 
