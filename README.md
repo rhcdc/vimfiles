@@ -13,5 +13,5 @@ So...here is a place to pile the vimfiles stuff, wish I could keep it clean
 	crash ycmserver upon re-opening the .cpp file while the other like
 	'vector' will not
 - [x] latex preview on windows
-- [ ] markdown preview on windows
+- [x] markdown preview on windows
 - [ ] fix time stamp language on windows

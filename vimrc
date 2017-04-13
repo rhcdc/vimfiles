@@ -3,18 +3,24 @@
 
 
 
+" testing " {{{ 
+if has("unix")
+  let g:path_to_dotfiles='~/.vim'
+elseif has("win32")
+  " here '~' replace traditional '$HOME' for .ycm_extra_conf, see below
+  let g:path_to_dotfiles='~/vimfiles'
+endif
+" " }}}
+
+
+
 " PLUGINS " {{{
 " vundle
 set nocompatible
 filetype off
 
-if has("unix")
-  set runtimepath+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-elseif has("win32")
-  set runtimepath+=$HOME/vimfiles/bundle/Vundle.vim/
-  call vundle#begin('$HOME/vimfiles/bundle')
-endif
+exec "set runtimepath+=".g:path_to_dotfiles."/bundle/Vundle.vim"
+exec "call vundle#begin('".g:path_to_dotfiles."/bundle')"
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-surround'
@@ -30,11 +36,8 @@ filetype plugin indent on    " required
 
 " ycm
 set completeopt=longest,menu
-if has("unix")
-  let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-elseif has("win32")
-  let g:ycm_global_ycm_extra_conf='~/vimfiles/.ycm_extra_conf.py'
-endif
+" does not work fow g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
+let g:ycm_global_ycm_extra_conf=g:path_to_dotfiles."/.ycm_extra_conf.py"
 let g:ycm_server_python_interpreter='C:/Python27/python.exe'
 let g:ycm_enable_diagnostic_signs=0
 let g:ycm_autoclose_preview_window_after_insertion=1
@@ -53,6 +56,7 @@ au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey
 
 " markdown-preview
 let g:mkdp_auto_close=0
+" need chrome in PATH for win-os
 let g:mkdp_path_to_chrome='chrome'
 " " }}}
 
@@ -60,11 +64,7 @@ let g:mkdp_path_to_chrome='chrome'
 
 " GENERAL " {{{
 " viminfo path
-if has("unix")
-  set viminfo+=n~/.vim/viminfo
-elseif has("win32")
-  set viminfo+=n$HOME/vimfiles/viminfo
-endif
+exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
 
 " remove splash screen
 set shortmess+=I
@@ -100,11 +100,11 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 syntax enable
 syntax on
 
-if has("gui_win32")
+if has("gui")
   colorscheme molokai
-else
+elseif
   colorscheme desert
-end
+endif
 
 set cursorline
 set hlsearch

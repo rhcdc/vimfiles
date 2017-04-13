@@ -2,6 +2,7 @@
 " kjk@rhcdc
 
 
+
 " GENERAL " {{{
 " silent the bell/vbell
 set visualbell
