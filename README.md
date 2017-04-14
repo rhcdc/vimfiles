@@ -17,3 +17,4 @@ So...here is a place to pile the vimfiles stuff, wish I could keep it clean
 - [x] latex preview on windows
 - [x] markdown preview on windows
 - [ ] fix time stamp language on windows
+- [ ] merge

@@ -23,13 +23,13 @@ exec "set runtimepath+=".g:path_to_dotfiles."/bundle/Vundle.vim"
 exec "call vundle#begin('".g:path_to_dotfiles."/bundle')"
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-scripts/winmanager'
 Plugin 'tpope/vim-surround'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-scripts/winmanager'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -37,8 +37,9 @@ filetype plugin indent on    " required
 
 " ycm
 set completeopt=longest,menu
-" does not work fow g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
+" does not work for g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
 let g:ycm_global_ycm_extra_conf=g:path_to_dotfiles."/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf=0
 let g:ycm_server_python_interpreter='C:/Python27/python.exe'
 let g:ycm_enable_diagnostic_signs=0
 let g:ycm_autoclose_preview_window_after_insertion=1
@@ -205,10 +206,3 @@ augroup vimscript
   au BufWritePost $MYVIMRC source $MYVIMRC    
 augroup END
 " " }}}
-
-
-
-
-
-
-

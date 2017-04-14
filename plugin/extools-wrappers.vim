@@ -1,4 +1,4 @@
-" extools and wrappers, need tidying
+" external tools and wrappers, need tidying
 
 " kjk@rhcdc 
 " 2017-04-13 22:50:21 +0800
