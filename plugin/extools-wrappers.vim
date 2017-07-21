@@ -86,24 +86,3 @@ func! LatexOuput()
   endif
 endfunc
 " " }}}
-
-
-
-" winmanager wrapper " {{{
-" just want to enable wmanager to load current file's dir
-" into the file explorer, brutal force used here... directly
-" use the function from winmanager.vim
-
-function! CurrentFileDirWMToggle()
-  if IsWinManagerVisible()
-    exec "normal! :WMToggle\<CR>"
-  else
-    let a:save_cwd=getcwd()
-    let a:cur_file_dir=expand("%:p:h")
-    silent exec "normal! :WMToggle\<CR>\:FirstExplorerWindow\<CR>"
-    exec "lcd ".a:cur_file_dir
-    exec "normal C"
-    exec "lcd ".a:save_cwd
-  endif
-endfunction
-" " }}}

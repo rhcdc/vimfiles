@@ -32,6 +32,24 @@ set guioptions-=r
 set guioptions-=b
 set guioptions-=e
 set guioptions+=c
+
+" rendering opt
+"set renderoptions=type:directx,renmode:5,taamode:1 
+" " }}}
+
+
+
+" KEYMAPPING " {{{
+" tab nav (work for gvim, fail for vim in some (most) term simulators)
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+inoremap <C-t>     <Esc>:tabnew<CR>
+
+" toggle fullscreen for gvim : no wimproved.vim
+"nnoremap <F11> <Esc>:WToggleFullscreen<CR>
 " " }}}
 
 
@@ -39,8 +57,16 @@ set guioptions+=c
 " AUTOCOMMANDS " {{{
 " vimscript
 augroup vimscript
-    au!
-    " auto-reload gvimrc after writen
-    au BufWritePost $MYGVIMRC source $MYGVIMRC
+  au!
+  " auto-reload gvimrc after writen
+  au BufWritePost $MYGVIMRC source $MYGVIMRC
+augroup END
+
+
+" GUI entering
+augroup guienter
+  au!
+  " set GUI window's init position to {X, Y}
+  au GUIEnter * winpos 100 50
 augroup END
 " " }}}
