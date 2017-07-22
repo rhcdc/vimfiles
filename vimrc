@@ -31,27 +31,34 @@ Plugin 'iamcco/markdown-preview.vim'
 Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on 
 
 
-"ultisnips
+" ultisnips
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<C-e>"
 
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '-'
+
 
 " ycm
-set completeopt=longest,menu
+" compiled in py2 but loaded in py3
+let g:ycm_server_python_interpreter="C:/Python27/python.exe"
 " does not work for g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
 let g:ycm_global_ycm_extra_conf=g:path_to_dotfiles."/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf=0
-let g:ycm_server_python_interpreter='C:/Python27/python.exe'
-let g:ycm_enable_diagnostic_signs=0
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_auto_trigger=1
 let g:ycm_filetype_blacklist={}
+let g:ycm_auto_trigger=1
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_show_diagnostics_ui=0
+let g:ycm_enable_diagnostic_signs=0
 
 
 " indent guides
@@ -77,6 +84,9 @@ exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
 
 " remove splash screen
 set shortmess+=I
+
+" completion options
+set completeopt=longest,menu
 
 " fix backspace
 set backspace=indent,eol,start
@@ -191,7 +201,10 @@ cnoremap <C-x>  <C-a>
 " nerdtree
 nnoremap <silent> <F4> :NERDTreeToggle %<CR>
 
-" ycm short-cut
+" ale
+nnoremap <silent> <leader>a :ALEToggle<CR>
+
+" ycm
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 " " }}}
