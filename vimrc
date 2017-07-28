@@ -49,8 +49,10 @@ let g:ale_sign_warning = '-'
 
 
 " ycm
-" compiled in py2 but loaded in py3
-let g:ycm_server_python_interpreter="C:/Python27/python.exe"
+" compiled in py2 but loaded in py3, ad hoc
+if has("win32")
+  let g:ycm_server_python_interpreter="C:/Python27/python.exe"
+endif
 " does not work for g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
 let g:ycm_global_ycm_extra_conf=g:path_to_dotfiles."/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf=0
@@ -129,11 +131,7 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 syntax enable
 syntax on
 
-if has("gui")
-  colorscheme molokai
-elseif
-  colorscheme desert
-endif
+colorscheme molokai
 
 set cursorline
 set hlsearch
