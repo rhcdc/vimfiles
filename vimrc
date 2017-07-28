@@ -75,7 +75,11 @@ au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey
 " markdown-preview
 let g:mkdp_auto_close=0
 " need chrome in PATH for win-os
-let g:mkdp_path_to_chrome='chrome'
+if has("unix")
+  let g:mkdp_path_to_chrome='google-chrome'
+elseif has("win32")
+  let g:mkdp_path_to_chrome='chrome'
+endif
 " " }}}
 
 
