@@ -216,6 +216,13 @@ augroup vimscript
   " auto-reload vimrc after writen
   au BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
+
+" markdown
+augroup markdown
+  au!
+  " in case that old Vim may identify *.md as *.modula-2
+  au BufNewFile,BufRead *.md set filetype=markdown
+augroup END
 " " }}}
 
 
