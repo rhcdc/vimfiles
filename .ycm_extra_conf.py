@@ -65,6 +65,7 @@ flags = [
 '/usr/include/x86_64-linux-gnu',
 '-isystem',
 '/usr/include',
+
 # for centos 7
 # '-isystem',
 # '/usr/include/c++/4.8.5',
@@ -78,6 +79,37 @@ flags = [
 # '/usr/local/include',
 # '-isystem',
 # '/usr/include',
+
+# for wingw64
+# '-isystem',
+# 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include\\c++',
+# '-isystem',
+# 'C:\\Program
+# Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include\\c++\\x86_64-w64-mingw32',
+# '-isystem',
+# 'C:\\Program
+# Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include\\c++\\backward',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include',
+# '-isystem',
+# 'C:\\Program
+# Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include-fixed',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include',
+
+# for mingw-distro
+# '-isystem',
+# 'C:\\Program Files\\mingw\\include\\c++\\6.3.0',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\include\\c++\\6.3.0\\x86_64-w64-mingw32',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\include\\c++\\6.3.0\\backward',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\lib\\gcc\\x86_64-w64-mingw32\\6.3.0\\include-fixed',
+# '-isystem',
+# 'C:\\Program Files\\mingw\\x86_64-w64-mingw32\\include',
 ]
 
 

@@ -1,7 +1,7 @@
 " vimrc (unix/win32)
 " kjk@rhcdc
 
- 
+
 
 " PROBING " {{{ 
 if has("unix")
@@ -264,13 +264,13 @@ let g:statstyle="%{ColorModeIndicator()}"
 function! ColorModeIndicator()
   redrawstatus!
   if (mode() =~# '\v(n|no)')
-    exe 'hi! User6 cterm=bold ctermfg=004 
+    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=254 
 		\ gui=bold guifg=Black guibg=#e4e4e4'
   elseif (mode() =~# '\v^[vV]')
-    exe 'hi! User6 cterm=bold ctermfg=004 
+    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=51
 		\ gui=bold guifg=Black guibg=#00ffff'
   elseif (mode() ==# 'i')
-    exe 'hi! User6 cterm=bold ctermfg=004 ctermbg=004 
+    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=46
 		\ gui=bold guifg=Black guibg=#00ff00'
   endif
 
@@ -283,18 +283,19 @@ let g:NERDTreeStatusline="%4*%{b:NERDTree.root.path.str()}"
 " statline highlight grp 
 hi StatusLine cterm=bold ctermfg=2 ctermbg=8 
 	    \ gui=bold guifg=#757575 guibg=Black
-hi User5 cterm=bold gui=bold ctermbg=Gray guifg=#282828 guibg=#666666
-hi User1 cterm=bold ctermfg=LightGray ctermbg=DarkGray
+hi User5 cterm=bold  ctermfg=235 ctermbg=241
+	    \ gui=bold guifg=#282828 guibg=#666666
+hi User1 cterm=bold ctermfg=248 ctermbg=238
 	    \ gui=bold guifg=#a4a4a4 guibg=#464646
-hi User4 cterm=bold ctermfg=Black ctermbg=LightGray 
+hi User4 cterm=bold ctermfg=248 ctermbg=234 
 	    \ gui=bold guifg=#a4a4a4 guibg=#333333
-hi User3 cterm=bold ctermfg=Black ctermbg=LightGray 
+hi User3 cterm=bold ctermfg=245 ctermbg=238 
 	    \ gui=bold guifg=#888888 guibg=#484848
-hi User2 cterm=bold ctermfg=Black ctermbg=LightGray 
+hi User2 cterm=bold ctermfg=236 ctermbg=241 
 	    \ gui=bold guifg=#353535 guibg=#686868
-hi User7 cterm=bold ctermfg=Black ctermbg=LightGray 
+hi User7 cterm=bold ctermfg=Black ctermbg=237 
 	    \ gui=bold guifg=Black guibg=#333333
-hi User8 cterm=bold ctermfg=Black ctermbg=LightGray 
+hi User8 cterm=bold ctermfg=235 ctermbg=237 
 	    \ gui=bold guifg=#282828 guibg=#333333
 
 augroup WinLocalStatline
