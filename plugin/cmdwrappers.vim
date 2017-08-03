@@ -6,11 +6,9 @@
 " gcc wrappers "{{{
 " compile standalone .c/.cpp
 if has("win32")
-  let s:outspec = " -o %<.exe %"
-  let s:goutspec = " -g -o %<-debug.exe %"
+  let s:extension = ".exe"
 elseif has("unix")
-  let s:outspec = " -o %<.out %"
-  let s:goutspec = " -g -o %<-debug.out %"
+  let s:extension = ".out"
 endif
 
 let s:cflag = "-std=c1x -Wall -Wextra"
@@ -19,29 +17,29 @@ let s:ccflag = "-std=c++14 -Wc++11-compat -Wc++14-compat -Wall -Wextra"
 " gcc
 func! ExComplierGcc()
   exec "w"
-  exec "!gcc " . s:cflag . s:outspec
-  exec "!" . expand("%:p:r")
+  exec "!gcc " . s:cflag .  " % -o %<" . s:extension
+  exec "!" . expand("%:p:r") . s:extension
 endfunc
 
 " gcc then gdb
 func! ExComplierGccGdb()
   exec "w"
-  exec "!gcc " . s:cflag . s:goutspec
-  exec "!gdb " . expand("%:p:r") . "-debug"
+  exec "!gcc " . s:cflag . " % -o %<-debug" . s:extension
+  exec "!gdb " . expand("%:p:r") . "-debug" . s:extension
 endfunc
 
 " g++
 func! ExComplierGpp()
   exec "w"
-  exec "!g++ ". s:ccflag . s:outspec
-  exec "!" . expand("%:p:r")
+  exec "!g++ ". s:ccflag . " % -o %<" . s:extension
+  exec "!" . expand("%:p:r") . s:extension
 endfunc
 
 " g++ then gdb
 func! ExComplierGppGdb()
   exec "w"
-  exec "!g++ " . s:ccflag . s:goutspec
-  exec "!gdb " . expand("%:p:r") . "-debug"
+  exec "!g++ " . s:ccflag . " % -o %<-debug" . s:extension
+  exec "!gdb " . expand("%:p:r") . "-debug" . s:extension
 endfunc
 " " }}}
 

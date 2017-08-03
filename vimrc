@@ -125,7 +125,6 @@ set t_vb=
 
 " boost
 set lazyredraw
-set ttyfast
 
 " encoding
 set encoding=utf-8
