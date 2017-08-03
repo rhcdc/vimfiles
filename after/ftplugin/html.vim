@@ -1,7 +1,5 @@
-" HTML filetype plugin
-" Language:	HTML
-" Maintainer:	kjk@rhcdc
-" Last Change:	2017-04-14 09:54:51 +0800
+" kjk@rhcdc
+" some extra settings for html files
 
 " indent setting
 setlocal softtabstop=2

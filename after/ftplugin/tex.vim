@@ -1,7 +1,5 @@
-" LaTeX filetype plugin
-" Language:	LaTeX (ft=tex)
-" Maintainer:	kjk@rhcdc
-" Last Change:	2017-01-02 12:17:07 +0800
+" kjk@rhcdc
+" some extra settings for tex files
 
 " keymappings
 nnoremap <buffer> <F5> :LLPStartPreview<CR>

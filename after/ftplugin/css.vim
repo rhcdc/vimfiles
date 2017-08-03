@@ -1,7 +1,5 @@
-" CSS filetype plugin
-" Language:	CSS
-" Maintainer:	kjk@rhcdc
-" Last Change:  2017-01-02 11:48:23 +0800	
+" kjk@rhcdc
+" some extra settings for css files
 
 " indent setting
 setlocal softtabstop=2

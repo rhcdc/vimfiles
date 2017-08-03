@@ -1,7 +1,5 @@
-" Vim filetype plugin
-" Language:	Vim
-" Maintainer:	kjk@rhcdc
-" Last Change:	2017-01-02 11:59:22 +0800
+" kjk@rhcdc
+" some extra settings for vimscript files
 
 " indent
 setlocal softtabstop=2

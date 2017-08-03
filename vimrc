@@ -39,8 +39,11 @@ filetype plugin indent on
 
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsListSnippets="<C-e>"
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsListSnippets = "<C-e>"
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
+let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
+let g:UltiSnipsEditSplit = "vertical"
 
 " ale
 let g:ale_sign_column_always = 1
@@ -51,23 +54,23 @@ let g:ale_sign_warning = '-'
 " ycm
 " compiled in py2 but loaded in py3, ad hoc
 if has("win32")
-  let g:ycm_server_python_interpreter="C:/Python27/python.exe"
+  let g:ycm_server_python_interpreter = "C:/Python27/python.exe"
 endif
-" does not work for g:path_to_dotfiles='$HOME/vimfiles', can't figure why...
-let g:ycm_global_ycm_extra_conf=g:path_to_dotfiles."/.ycm_extra_conf.py"
-let g:ycm_confirm_extra_conf=0
-let g:ycm_filetype_blacklist={}
-let g:ycm_auto_trigger=1
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_show_diagnostics_ui=0
-let g:ycm_enable_diagnostic_signs=0
+" does not work for g:path_to_dotfiles = '$HOME/vimfiles', can't figure why...
+let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles."/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_filetype_blacklist = {} " enable for .md, .txt
+let g:ycm_auto_trigger = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
 
 
 " indent guides
-let g:indent_guides_enable_on_vim_startup=0
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 0
 au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=LightGrey guibg=LightGrey
 au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey 
 
@@ -167,8 +170,7 @@ inoremap jk <Esc>
 nnoremap j gj
 nnoremap k gk
 
-" quick to buffer
-nnoremap <silent> <C-k> :b#<CR>
+" buffer nav
 nnoremap <silent> <C-n> :bnext<CR>
 nnoremap <silent> <C-h> :bprev<CR>
 
@@ -203,8 +205,14 @@ cnoremap <C-x>  <C-a>
 " nerdtree
 nnoremap <silent> <F4> :NERDTreeToggle %<CR>
 
+" ultisnips
+nnoremap <silent> <leader>ue :UltiSnipsEdit<CR>
+nnoremap <silent> <F3> <Esc>:call UltiSnips#ListSnippets()<CR>
+
 " ale
 nnoremap <silent> <leader>a :ALEToggle<CR>
+nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " ycm
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
@@ -314,9 +322,9 @@ augroup END
 augroup vimdoc
   au!
   au BufEnter *.txt if(&ft==#'help')
-	\| nnoremap <silent><buffer> <C-j> 
+	\| nnoremap <silent><buffer> <C-@> 
 	\:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
-	\| nnoremap <silent><buffer> <C-g> 
+	\| nnoremap <silent><buffer> <C-_> 
 	\:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
 augroup END
 " " }}}

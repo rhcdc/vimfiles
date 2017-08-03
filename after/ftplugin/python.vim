@@ -1,7 +1,5 @@
-" Python filetype plugin
-" Language:	Python
-" Maintainer:	kjk@rhcdc
-" Last Change:	2017-01-02 12:07:40 +0800
+" kjk@rhcdc
+" some extra settings for python files
 
 " keymappings
 if has("python")

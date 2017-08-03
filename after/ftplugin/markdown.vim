@@ -1,7 +1,5 @@
-" Markdown filetype plugin
-" Language:	Markdown
-" Maintainer:	kjk@rhcdc
-" Last Change:	2017-01-01 20:52:42 +0800
+" kjk@rhcdc
+" some extra settings for markdown files
 
 " keymappings
 nmap <silent><buffer> <F5> <Plug>MarkdownPreview
