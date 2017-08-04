@@ -174,10 +174,10 @@ nnoremap <silent> <C-n> :bnext<CR>
 nnoremap <silent> <C-h> :bprev<CR>
 
 " toggle line wrap
-nnoremap <silent> <leader><leader>w :set wrap!<CR>
+nnoremap <silent> <leader><leader>w :set wrap!<CR>:set wrap?<CR>
 
 " toggle proofing
-nnoremap <silent> <leader><leader>p :set spell!<CR>
+nnoremap <silent> <leader><leader>p :set spell!<CR>:set spell?<CR>
 
 " highway to $MYVIMRC
 nnoremap <silent> <leader>s :source $MYVIMRC<CR>
