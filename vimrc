@@ -1,20 +1,19 @@
-" vimrc (unix/win32)
+" vimrc
 " kjk@rhcdc
 
 
 
 " PROBING " {{{ 
 if has("unix")
-  let g:path_to_dotfiles='~/.vim'
+  let g:path_to_dotfiles = '~/.vim'
 elseif has("win32")
-  " here '~' replace traditional '$HOME' for .ycm_extra_conf, see below
-  let g:path_to_dotfiles='~/vimfiles'
+  let g:path_to_dotfiles = '~/vimfiles'
 endif
 " " }}}
 
 
 
-" PLUGINS " {{{
+" VUNDLE " {{{
 " vundle
 set nocompatible
 filetype off
@@ -33,56 +32,10 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
-
+" try try try
+Plugin 'ctrlpvim/ctrlp.vim'
 call vundle#end()
 filetype plugin indent on 
-
-
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsListSnippets = "<C-e>"
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
-let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
-let g:UltiSnipsEditSplit = "vertical"
-
-" ale
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>'
-let g:ale_sign_warning = '-'
-
-
-" ycm
-" compiled in py2 but loaded in py3, ad hoc
-if has("win32")
-  let g:ycm_server_python_interpreter = "C:/Python27/python.exe"
-endif
-" does not work for g:path_to_dotfiles = '$HOME/vimfiles', can't figure why...
-let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles."/.ycm_extra_conf.py"
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_filetype_blacklist = {} " enable for .md, .txt
-let g:ycm_auto_trigger = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_enable_diagnostic_signs = 0
-
-
-" indent guides
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-let g:indent_guides_auto_colors = 0
-au VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=LightGrey guibg=LightGrey
-au VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=DarkGrey guibg=DarkGrey 
-
-
-" markdown-preview
-let g:mkdp_auto_close=0
-" need chrome in PATH for win-os
-if has("unix")
-  let g:mkdp_path_to_chrome='google-chrome'
-elseif has("win32")
-  let g:mkdp_path_to_chrome='chrome'
-endif
 " " }}}
 
 
@@ -90,9 +43,6 @@ endif
 " GENERAL " {{{
 " viminfo path
 exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
-
-" remove splash screen
-set shortmess+=I
 
 " completion options
 set completeopt=longest,menu
@@ -116,14 +66,14 @@ set textwidth=80
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 set smartindent
 
 " silent the bell/vbell
 set visualbell
 set t_vb=
 
-" boost
+" boost redrawing
 set lazyredraw
 
 " encoding
@@ -155,6 +105,57 @@ set laststatus=2
 " 80 charwrap indicator
 highlight ColorColumn term=reverse ctermbg=Black guibg=Black
 set colorcolumn=81
+" " }}}
+
+
+
+" PLUGINS " {{{
+" ultisnips
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsListSnippets = "<C-e>"
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
+let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
+let g:UltiSnipsEditSplit = "vertical"
+
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+hi ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
+hi ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
+
+
+" ycm
+" compiled in py2 but loaded in py3, ad hoc
+if has("win32")
+  let g:ycm_server_python_interpreter = "C:/devpac/python27/python.exe"
+endif
+let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles . '/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_filetype_blacklist = {}	      " enable for .md, .txt
+let g:ycm_auto_trigger = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+
+
+" indent guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+
+" markdown-preview
+let g:mkdp_auto_close = 0
+" need chrome in PATH for win-os
+if has("unix")
+  let g:mkdp_path_to_chrome = 'google-chrome'
+elseif has("win32")
+  let g:mkdp_path_to_chrome = 'chrome'
+endif
+
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' 
 " " }}}
 
 
@@ -242,47 +243,47 @@ augroup END
 " StatLine specified for each window
 let g:unknownftstr=' - '
 let g:currentmode={
-    \ 'n'  : 'NORMAL ',
-    \ 'no' : 'PENDIND ',
-    \ 'v'  : 'VISUAL ',
-    \ 'V'  : 'V·LINE ',
-    \ '' : 'V·BLOCK ',
-    \ 's'  : 'SELECT ',
-    \ 'S'  : 'S·LINE ',
-    \ '' : 'S·BLOCK ',
-    \ 'i'  : 'INSERT ',
-    \ 'R'  : 'REPLACE ',
-    \ 'Rv' : 'R·VIRTUAL ',
-    \ 'c'  : 'COMMAND ',
-    \ 'cv' : 'EX·VIM ',
-    \ 'ce' : 'EX·NORMAL ',
-    \ 'r'  : 'PROMPT ',
-    \ 'rm' : 'MORE ',
-    \ 'r?' : 'CONFIRM ',
-    \ '!'  : 'SHELL ',
-    \ 't'  : 'Terminal '
-    \} 
+      \ 'n'  : 'NORMAL ',
+      \ 'no' : 'PENDIND ',
+      \ 'v'  : 'VISUAL ',
+      \ 'V'  : 'V·LINE ',
+      \ '' : 'V·BLOCK ',
+      \ 's'  : 'SELECT ',
+      \ 'S'  : 'S·LINE ',
+      \ '' : 'S·BLOCK ',
+      \ 'i'  : 'INSERT ',
+      \ 'R'  : 'REPLACE ',
+      \ 'Rv' : 'R·VIRTUAL ',
+      \ 'c'  : 'COMMAND ',
+      \ 'cv' : 'EX·VIM ',
+      \ 'ce' : 'EX·NORMAL ',
+      \ 'r'  : 'PROMPT ',
+      \ 'rm' : 'MORE ',
+      \ 'r?' : 'CONFIRM ',
+      \ '!'  : 'SHELL ',
+      \ 't'  : 'Terminal '
+      \} 
 let g:statstyle="%{ColorModeIndicator()}"
-	    \. "%6*\ %{g:currentmode[mode()]}"
-	    \. "%5*\ %.20f\%r\ "
-	    \. "%1*\ %n\ "
-	    \. "%4*%="
-	    \. "%3*\ %{(&ft!=''?&ft:g:unknownftstr)}\|"
-	    \. "%{(&fenc!=''?&fenc:&enc)}\|%{&ff}\ "
-	    \. "%2*\ %4(%p%%%)\ "
-	    \. "%3l:%-3v"
+      \. "%6*\ %{g:currentmode[mode()]}"
+      \. "%5*\ %.20f\%r\ "
+      \. "%1*\ %n\ "
+      \. "%4*%="
+      \. "%3*\ %{(&ft!=''?&ft:g:unknownftstr)}\|"
+      \. "%{(&fenc!=''?&fenc:&enc)}\|%{&ff}\ "
+      \. "%2*\ %4(%p%%%)\ "
+      \. "%3l:%-3v"
 
 function! ColorModeIndicator()
   redrawstatus!
   if (mode() =~# '\v(n|no)')
     exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=254 
-		\ gui=bold guifg=Black guibg=#e4e4e4'
+          \ gui=bold guifg=Black guibg=#e4e4e4'
   elseif (mode() =~# '\v^[vV]')
     exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=51
-		\ gui=bold guifg=Black guibg=#00ffff'
+          \ gui=bold guifg=Black guibg=#00ffff'
   elseif (mode() ==# 'i')
     exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=46
-		\ gui=bold guifg=Black guibg=#00ff00'
+          \ gui=bold guifg=Black guibg=#00ff00'
   endif
 
   return ''
@@ -293,26 +294,26 @@ let &statusline=g:statstyle
 let g:NERDTreeStatusline="%4*%{b:NERDTree.root.path.str()}"
 " statline highlight grp 
 hi StatusLine cterm=bold ctermfg=2 ctermbg=8 
-	    \ gui=bold guifg=#757575 guibg=Black
+      \ gui=bold guifg=#757575 guibg=Black
 hi User5 cterm=bold  ctermfg=235 ctermbg=241
-	    \ gui=bold guifg=#282828 guibg=#666666
+      \ gui=bold guifg=#282828 guibg=#666666
 hi User1 cterm=bold ctermfg=248 ctermbg=238
-	    \ gui=bold guifg=#a4a4a4 guibg=#464646
+      \ gui=bold guifg=#a4a4a4 guibg=#464646
 hi User4 cterm=bold ctermfg=248 ctermbg=234 
-	    \ gui=bold guifg=#a4a4a4 guibg=#333333
+      \ gui=bold guifg=#a4a4a4 guibg=#333333
 hi User3 cterm=bold ctermfg=245 ctermbg=238 
-	    \ gui=bold guifg=#888888 guibg=#484848
+      \ gui=bold guifg=#888888 guibg=#484848
 hi User2 cterm=bold ctermfg=236 ctermbg=241 
-	    \ gui=bold guifg=#353535 guibg=#686868
+      \ gui=bold guifg=#353535 guibg=#686868
 hi User7 cterm=bold ctermfg=Black ctermbg=237 
-	    \ gui=bold guifg=Black guibg=#333333
+      \ gui=bold guifg=Black guibg=#333333
 hi User8 cterm=bold ctermfg=235 ctermbg=237 
-	    \ gui=bold guifg=#282828 guibg=#333333
+      \ gui=bold guifg=#282828 guibg=#333333
 
 augroup WinLocalStatline
   au!
   au BufWinEnter,WinEnter * if(&ft!=#'nerdtree') 
-	\| let &l:statusline=g:statstyle 
+        \| let &l:statusline=g:statstyle 
   au WinLeave * if(&ft!=#'nerdtree') | let &l:statusline="%7*\ %="
 augroup END
 
@@ -321,9 +322,18 @@ augroup END
 augroup vimdoc
   au!
   au BufEnter *.txt if(&ft==#'help')
-	\| nnoremap <silent><buffer> <C-@> 
-	\:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
-	\| nnoremap <silent><buffer> <C-_> 
-	\:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
+        \| nnoremap <silent><buffer> <C-@> 
+        \:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
+        \| nnoremap <silent><buffer> <C-_> 
+        \:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
 augroup END
+
+
+" combine ag with ctrlp
+"if executable('ag')
+"set grepprg=ag\ --nogroup\ --nocolor
+"let g:ctrlp_user_command = 'ag -l --hidden --nocolor -g "" %s'
+"let g:ctrlp_working_path_mode = 'wra'
+"let g:ctrlp_use_caching = 0 
+"endif
 " " }}}
