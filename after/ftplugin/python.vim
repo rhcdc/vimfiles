@@ -1,6 +1,12 @@
 " kjk@rhcdc
 " some extra settings for python files
 
+" indention
+setlocal tabstop=8
+setlocal softtabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+
 " keymappings
 if has("python")
   nnoremap <buffer> <F5> :w<CR>:pyf %<CR>
