@@ -76,6 +76,7 @@ set t_vb=
 
 " boost redrawing
 set lazyredraw
+set ttyfast
 
 " encoding
 set encoding=utf-8
@@ -86,6 +87,11 @@ set listchars=tab:▸\ ,eol:¬
 
 " auto hidden buffers
 set hidden
+
+" if has par, then use par
+if executable('par')
+  set formatprg=par
+endif
 " " }}}
 
 
@@ -134,7 +140,7 @@ hi ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
 " ycm
 " compiled in py2 but loaded in py3, ad hoc
 if has("win32")
-  let g:ycm_server_python_interpreter = "C:/devpac/python27/python.exe"
+  let g:ycm_server_python_interpreter = "C:/devpac/python36/python.exe"
 endif
 let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles . '/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
@@ -212,7 +218,7 @@ cnoremap <M-d>  <S-Right><C-w>
 cnoremap <C-x>  <C-a>
 
 " nerdtree
-nnoremap <silent> <F4> :NERDTreeToggle %<CR>
+nnoremap <silent> <F4> :NERDTreeToggle %:p:h<CR>
 
 " ultisnips
 nnoremap <silent> <leader>ue :UltiSnipsEdit<CR>
