@@ -67,6 +67,7 @@ set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set autoindent
 set smartindent
 
 " silent the bell/vbell
@@ -75,10 +76,22 @@ set t_vb=
 
 " boost redrawing
 set lazyredraw
+set ttyfast
 
 " encoding
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+
+" listchar 
+set listchars=tab:▸\ ,eol:¬
+
+" auto hidden buffers
+set hidden
+
+" if has par, then use par
+if executable('par')
+  set formatprg=par
+endif
 " " }}}
 
 
@@ -112,7 +125,6 @@ set colorcolumn=81
 " PLUGINS " {{{
 " ultisnips
 let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsListSnippets = "<C-e>"
 let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
 let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
 let g:UltiSnipsEditSplit = "vertical"
@@ -180,6 +192,9 @@ nnoremap <silent> <leader><leader>w :set wrap!<CR>:set wrap?<CR>
 " toggle proofing
 nnoremap <silent> <leader><leader>p :set spell!<CR>:set spell?<CR>
 
+" toggle invisibles
+nnoremap <silent> <leader><leader>l :set list!<CR>:set list?<CR>
+
 " highway to $MYVIMRC
 nnoremap <silent> <leader>s :source $MYVIMRC<CR>
 nnoremap <silent> <leader>e :tabnew $MYVIMRC<CR>
@@ -203,7 +218,7 @@ cnoremap <M-d>  <S-Right><C-w>
 cnoremap <C-x>  <C-a>
 
 " nerdtree
-nnoremap <silent> <F4> :NERDTreeToggle %<CR>
+nnoremap <silent> <F4> :NERDTreeToggle %:p:h<CR>
 
 " ultisnips
 nnoremap <silent> <leader>ue :UltiSnipsEdit<CR>
