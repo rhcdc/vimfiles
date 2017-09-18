@@ -249,6 +249,17 @@ augroup markdown
   " in case that old Vim may identify *.md as *.modula-2
   au BufNewFile,BufRead *.md set filetype=markdown
 augroup END
+
+" tex
+augroup tex
+  au!
+  " identify tex instead of plaintex
+  au BufNewFile,BufRead *.tex set filetype=tex
+augroup END
+" " }}}
+
+
+
 " " }}}
 
 
