@@ -260,10 +260,6 @@ augroup END
 
 
 
-" " }}}
-
-
-
 " LAB " {{{
 " StatLine specified for each window
 let g:unknownftstr=' - '
