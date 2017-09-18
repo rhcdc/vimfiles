@@ -41,6 +41,10 @@ filetype plugin indent on
 
 
 " GENERAL " {{{
+" encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+
 " viminfo path
 exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
 
@@ -76,11 +80,6 @@ set t_vb=
 
 " boost redrawing
 set lazyredraw
-set ttyfast
-
-" encoding
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 
 " listchar 
 set listchars=tab:▸\ ,eol:¬
@@ -249,6 +248,13 @@ augroup markdown
   au!
   " in case that old Vim may identify *.md as *.modula-2
   au BufNewFile,BufRead *.md set filetype=markdown
+augroup END
+
+" tex
+augroup tex
+  au!
+  " identify tex instead of plaintex
+  au BufNewFile,BufRead *.tex set filetype=tex
 augroup END
 " " }}}
 
