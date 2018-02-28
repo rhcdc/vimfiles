@@ -1,9 +1,9 @@
-" vimrc
+" ~/vimfiles/vimrc
 " kjk@rhcdc
 
 
 
-" PROBING " {{{ 
+" OS SPEC " {{{ 
 if has("unix")
   let g:path_to_dotfiles = '~/.vim'
 elseif has("win32")
@@ -32,8 +32,8 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
-" try try try
 Plugin 'ctrlpvim/ctrlp.vim'
+
 call vundle#end()
 filetype plugin indent on 
 " " }}}
@@ -41,13 +41,19 @@ filetype plugin indent on
 
 
 " GENERAL " {{{
-" encoding
+" i18n
+let $LANG='en'
+set langmenu=en
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 " viminfo path
 exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
 
+" no swapfiles
+set noswapfile
 " completion options
 set completeopt=longest,menu
 
@@ -117,6 +123,9 @@ set laststatus=2
 " 80 charwrap indicator
 highlight ColorColumn term=reverse ctermbg=Black guibg=Black
 set colorcolumn=81
+
+" scrolloff
+set scrolloff=8
 " " }}}
 
 
@@ -131,7 +140,7 @@ let g:UltiSnipsEditSplit = "vertical"
 " ale
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
+let g:ale_sign_warning = '!'
 hi ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
 hi ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
 
@@ -197,10 +206,6 @@ nnoremap <silent> <leader><leader>l :set list!<CR>:set list?<CR>
 " highway to $MYVIMRC
 nnoremap <silent> <leader>s :source $MYVIMRC<CR>
 nnoremap <silent> <leader>e :tabnew $MYVIMRC<CR>
-if has("gui")
-  nnoremap <silent> <leader><leader>s :source $MYGVIMRC<CR>
-  nnoremap <silent> <leader><leader>e :tabnew $MYGVIMRC<CR>
-endif
 
 " clean search highlights before redraw
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -209,10 +214,8 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 cnoremap <C-a>  <Home>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
 cnoremap <M-b>  <S-Left>
 cnoremap <M-f>  <S-Right>
-cnoremap <M-d>  <S-Right><C-w>
 " restoring
 cnoremap <C-x>  <C-a>
 
@@ -256,6 +259,53 @@ augroup tex
   " identify tex instead of plaintex
   au BufNewFile,BufRead *.tex set filetype=tex
 augroup END
+
+" vimdoc
+augroup vimdoc
+  au!
+  au BufEnter *.txt if(&ft==#'help')
+        \| nnoremap <silent><buffer> <Tab> 
+        \:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
+        \| nnoremap <silent><buffer> <S-Tab> 
+        \:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
+augroup END
+" " }}}
+
+
+
+" GUI " {{{
+if has("gui_running") 
+    " font
+    set guifont=Consolas:h11.5
+
+    " caret no blink
+    set guicursor=a:block-blinkon0
+
+    " customize menu, toolbar, scroll bar, etc.
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=L
+    set guioptions-=l
+    set guioptions-=R
+    set guioptions-=r
+    set guioptions-=b
+    set guioptions-=e
+    set guioptions+=c
+
+    " tab nav
+    nnoremap <C-S-tab> :tabprevious<CR>
+    nnoremap <C-tab>   :tabnext<CR>
+    inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+    inoremap <C-tab>   <Esc>:tabnext<CR>i
+
+    " GUI entering
+    augroup guienter
+        au!
+        " set GUI window's init gui interfaces
+        "au GUIEnter * winpos 100 50 | set vb t_vb=
+        au GUIEnter * set vb t_vb= lines=30 columns=135
+    augroup END
+endif
 " " }}}
 
 
@@ -282,7 +332,7 @@ let g:currentmode={
       \ 'rm' : 'MORE ',
       \ 'r?' : 'CONFIRM ',
       \ '!'  : 'SHELL ',
-      \ 't'  : 'Terminal '
+      \ 't'  : 'TERMINAL '
       \} 
 let g:statstyle="%{ColorModeIndicator()}"
       \. "%6*\ %{g:currentmode[mode()]}"
@@ -336,19 +386,7 @@ augroup WinLocalStatline
   au BufWinEnter,WinEnter * if(&ft!=#'nerdtree') 
         \| let &l:statusline=g:statstyle 
   au WinLeave * if(&ft!=#'nerdtree') | let &l:statusline="%7*\ %="
-augroup END
-
-
-" jump to next/prev tag in vim help docs
-augroup vimdoc
-  au!
-  au BufEnter *.txt if(&ft==#'help')
-        \| nnoremap <silent><buffer> <C-@> 
-        \:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
-        \| nnoremap <silent><buffer> <C-_> 
-        \:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
-augroup END
-
+augroup END 
 
 " combine ag with ctrlp
 "if executable('ag')
