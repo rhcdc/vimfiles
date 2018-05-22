@@ -1,4 +1,4 @@
-" ~/vimfiles/vimrc
+" vimrc
 " kjk@rhcdc
 
 
@@ -49,15 +49,13 @@ set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" viminfo path
-exec "set viminfo+=n".g:path_to_dotfiles."/viminfo"
-
 " no swapfiles
 set noswapfile
+
 " completion options
 set completeopt=longest,menu
 
-" fix backspace
+" backspace
 set backspace=indent,eol,start
 
 " case-insensitive, unless uppercase char specified
@@ -137,6 +135,7 @@ let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
 let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
 let g:UltiSnipsEditSplit = "vertical"
 
+
 " ale
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '•'
@@ -173,6 +172,8 @@ elseif has("win32")
   let g:mkdp_path_to_chrome = 'chrome'
 endif
 
+
+" ctrlp
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' 
@@ -260,15 +261,15 @@ augroup tex
   au BufNewFile,BufRead *.tex set filetype=tex
 augroup END
 
-" vimdoc
-augroup vimdoc
-  au!
-  au BufEnter *.txt if(&ft==#'help')
-        \| nnoremap <silent><buffer> <Tab> 
-        \:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
-        \| nnoremap <silent><buffer> <S-Tab> 
-        \:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
-augroup END
+" vimdoc (unecessary)
+"augroup vimdoc
+  "au!
+  "au BufEnter *.txt if(&ft==#'help')
+        "\| nnoremap <silent><buffer> <Tab> 
+        "\:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
+        "\| nnoremap <silent><buffer> <S-Tab> 
+        "\:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
+"augroup END
 " " }}}
 
 
@@ -302,7 +303,6 @@ if has("gui_running")
     augroup guienter
         au!
         " set GUI window's init gui interfaces
-        "au GUIEnter * winpos 100 50 | set vb t_vb=
         au GUIEnter * set vb t_vb= lines=30 columns=135
     augroup END
 endif
