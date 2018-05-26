@@ -125,7 +125,7 @@ set colorcolumn=81
 " scrolloff
 set scrolloff=8
 
-" termial
+" terminal
 set termwinsize=12x0
 " " }}}
 
@@ -164,12 +164,6 @@ let g:indent_guides_guide_size = 1
 
 " markdown-preview
 let g:mkdp_auto_close = 0
-" need chrome in PATH for win-os
-"if has("unix")
-  "let g:mkdp_path_to_chrome = 'google-chrome'
-"elseif has("win32")
-  "let g:mkdp_path_to_chrome = 'chrome'
-"endif
 
 
 " ctrlp
@@ -258,17 +252,7 @@ augroup tex
   au!
   " identify tex instead of plaintex
   au BufNewFile,BufRead *.tex set filetype=tex
-augroup END
-
-" vimdoc (unecessary)
-"augroup vimdoc
-  "au!
-  "au BufEnter *.txt if(&ft==#'help')
-        "\| nnoremap <silent><buffer> <Tab> 
-        "\:exe ":silent norm /\|.\\{-}\|\r:nohlsearch\r"<CR>
-        "\| nnoremap <silent><buffer> <S-Tab> 
-        "\:exe ":silent norm ?\|.\\{-}\|\r:nohlsearch\r"<CR>
-"augroup END
+augroup END 
 " " }}}
 
 
@@ -386,12 +370,4 @@ augroup WinLocalStatline
         \| let &l:statusline=g:statstyle 
   au WinLeave * if(&ft!=#'nerdtree') | let &l:statusline="%7*\ %="
 augroup END 
-
-" combine ag with ctrlp
-"if executable('ag')
-"set grepprg=ag\ --nogroup\ --nocolor
-"let g:ctrlp_user_command = 'ag -l --hidden --nocolor -g "" %s'
-"let g:ctrlp_working_path_mode = 'wra'
-"let g:ctrlp_use_caching = 0 
-"endif
 " " }}}
