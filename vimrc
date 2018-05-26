@@ -124,6 +124,9 @@ set colorcolumn=81
 
 " scrolloff
 set scrolloff=8
+
+" termial
+set termwinsize=12x0
 " " }}}
 
 
@@ -145,10 +148,6 @@ hi ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
 
 
 " ycm
-" compiled in py2 but loaded in py3, ad hoc
-if has("win32")
-  let g:ycm_server_python_interpreter = "C:/devpac/python36/python.exe"
-endif
 let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles . '/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_filetype_blacklist = {}	      " enable for .md, .txt
@@ -166,11 +165,11 @@ let g:indent_guides_guide_size = 1
 " markdown-preview
 let g:mkdp_auto_close = 0
 " need chrome in PATH for win-os
-if has("unix")
-  let g:mkdp_path_to_chrome = 'google-chrome'
-elseif has("win32")
-  let g:mkdp_path_to_chrome = 'chrome'
-endif
+"if has("unix")
+  "let g:mkdp_path_to_chrome = 'google-chrome'
+"elseif has("win32")
+  "let g:mkdp_path_to_chrome = 'chrome'
+"endif
 
 
 " ctrlp
