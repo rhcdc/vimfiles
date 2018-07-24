@@ -31,8 +31,8 @@ Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on 
@@ -127,6 +127,7 @@ set scrolloff=8
 
 " terminal
 set termwinsize=12x0
+highlight Terminal ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
 " " }}}
 
 
