@@ -13,29 +13,22 @@ endif
 
 
 
-" VUNDLE " {{{
-" vundle
-set nocompatible
-filetype off
+" VIM-PLUG " {{{
+exec "call plug#begin('".g:path_to_dotfiles."/plugged')"
 
-exec "set runtimepath+=".g:path_to_dotfiles."/bundle/Vundle.vim"
-exec "call vundle#begin('".g:path_to_dotfiles."/bundle')"
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe'
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'iamcco/markdown-preview.vim'
-Plugin 'iamcco/mathjax-support-for-mkdp'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'w0rp/ale'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
-
-call vundle#end()
-filetype plugin indent on 
+call plug#end()
 " " }}}
 
 
