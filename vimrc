@@ -16,17 +16,23 @@ endif
 " VIM-PLUG " {{{
 exec "call plug#begin('".g:path_to_dotfiles."/plugged')"
 
+" misc
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'iamcco/markdown-preview.vim'
-Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/mathjax-support-for-mkdp' 
+
+" linter and completer
+Plug 'w0rp/ale'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'w0rp/ale'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
+
+" finder
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 
 call plug#end()
 " " }}}
@@ -161,9 +167,18 @@ let g:mkdp_auto_close = 0
 
 
 " ctrlp
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' 
+"let g:ctrlp_use_caching = 1
+"let g:ctrlp_clear_cache_on_exit = 0
+"let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' 
+
+" leaderf
+let g:Lf_CacheDirectory = $HOME.'/.cache'
+let g:Lf_DefaultMode = 'FullPath'
+let g:Lf_WindowHeight = 0.3
+let g:Lf_HideHelp = 1
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_ShortcutF = '<c-p>'
+noremap <c-m> :LeaderfMru<CR>
 " " }}}
 
 

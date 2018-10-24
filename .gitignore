@@ -1,7 +1,12 @@
 ~*
-*.bak
 ~*/
-bundle/
+*.bak
+
+#
 plugged/
 spell/
 .ycm_extra_conf.py
+autoload/plug.vim*
+
+#deprecated
+#bundle/
