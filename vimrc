@@ -177,8 +177,8 @@ let g:Lf_DefaultMode = 'FullPath'
 let g:Lf_WindowHeight = 0.3
 let g:Lf_HideHelp = 1
 let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_ShortcutF = '<c-p>'
-noremap <c-m> :LeaderfMru<CR>
+let g:Lf_ShortcutF = '<C-p>'
+let g:Lf_ShortcutB = '<C-n>'
 " " }}}
 
 
@@ -192,10 +192,6 @@ nnoremap \ ,
 inoremap jk <Esc>
 nnoremap j gj
 nnoremap k gk
-
-" buffer nav
-nnoremap <silent> <C-n> :bnext<CR>
-nnoremap <silent> <C-h> :bprev<CR>
 
 " toggle line wrap
 nnoremap <silent> <leader><leader>w :set wrap!<CR>:set wrap?<CR>
