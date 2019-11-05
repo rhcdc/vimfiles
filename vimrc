@@ -117,7 +117,7 @@ highlight TabLineFill ctermfg=DarkGrey guifg=DarkGrey
 set laststatus=2 
 
 " 80 charwrap indicator
-highlight ColorColumn term=reverse ctermbg=Black guibg=Black
+highlight ColorColumn term=reverse ctermbg=DarkRed guibg=Black
 set colorcolumn=81
 
 " scrolloff
