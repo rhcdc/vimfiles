@@ -23,6 +23,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'iamcco/markdown-preview.vim'
 Plug 'iamcco/mathjax-support-for-mkdp' 
+Plug 'lervag/vimtex'
 
 " linter and completer
 Plug 'w0rp/ale'
@@ -31,7 +32,6 @@ Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe'
 
 " finder
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 
 call plug#end()
@@ -78,8 +78,7 @@ set autoindent
 set smartindent
 
 " silent the bell/vbell
-set visualbell
-set t_vb=
+set novisualbell t_vb=
 
 " boost redrawing
 set lazyredraw
@@ -90,7 +89,7 @@ set listchars=tab:▸\ ,eol:¬
 " auto hidden buffers
 set hidden
 
-" if has par, then use par
+" if par, use par
 if executable('par')
   set formatprg=par
 endif
@@ -159,17 +158,12 @@ let g:ycm_enable_diagnostic_signs = 0
 
 " indent guides
 let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+let g:indent_guides_guide_size = 2
 
 
 " markdown-preview
 let g:mkdp_auto_close = 0
 
-
-" ctrlp
-"let g:ctrlp_use_caching = 1
-"let g:ctrlp_clear_cache_on_exit = 0
-"let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' 
 
 " leaderf
 let g:Lf_CacheDirectory = $HOME.'/.cache'
@@ -178,7 +172,7 @@ let g:Lf_WindowHeight = 0.3
 let g:Lf_HideHelp = 1
 let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_ShortcutF = '<C-p>'
-let g:Lf_ShortcutB = '<C-n>'
+let g:Lf_ShortcutB = '<m-n>'
 " " }}}
 
 
@@ -233,6 +227,9 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 " ycm
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+
+" LeaderF
+noremap <c-n> :LeaderfMru<cr>
 " " }}}
 
 
@@ -347,8 +344,8 @@ function! ColorModeIndicator()
 
   return ''
 endfunction
-" default statline as a 'backup plan' for first window/tab 
-" where no WinEnter event popped out 
+" default statline as a 'backup' for first window/tab where no WinEnter event
+" happens
 let &statusline=g:statstyle
 let g:NERDTreeStatusline="%4*%{b:NERDTree.root.path.str()}"
 " statline highlight grp 
