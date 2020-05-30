@@ -18,18 +18,15 @@ exec "call plug#begin('".g:path_to_dotfiles."/plugged')"
 
 " misc
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'iamcco/markdown-preview.vim'
-Plug 'iamcco/mathjax-support-for-mkdp' 
-Plug 'lervag/vimtex'
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-airline/vim-airline'
 
-" linter and completer
-Plug 'w0rp/ale'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe'
+" linter and completor
+Plug 'dense-analysis/ale'
+Plug 'honza/vim-snippets' 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " finder
 Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
@@ -109,15 +106,18 @@ set incsearch
 set number
 set showcmd
 
-" tabline
-set showtabline=2
-highlight TabLineFill ctermfg=DarkGrey guifg=DarkGrey 
-
 " statusline
 set laststatus=2 
 
+" signcolumn
+if has("patch-8.1.1564")
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+
 " 80 charwrap indicator
-highlight ColorColumn term=reverse ctermbg=DarkRed guibg=Black
+highlight ColorColumn term=reverse ctermbg=darkred guibg=Black
 set colorcolumn=81
 
 " scrolloff
@@ -125,59 +125,12 @@ set scrolloff=8
 
 " terminal
 set termwinsize=12x0
-highlight Terminal ctermbg=black ctermfg=lightgreen guibg=black guifg=lightgreen
+highlight Terminal ctermbg=black ctermfg=green guibg=black guifg=lightgreen
 " " }}}
 
 
 
-" PLUGINS " {{{
-" ultisnips
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "mySnips"]
-let g:UltiSnipsSnippetsDir = g:path_to_dotfiles . "/after/mySnips"
-let g:UltiSnipsEditSplit = "vertical"
-
-
-" ale
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '!'
-hi ALEErrorSign ctermbg=NONE ctermfg=red guibg=NONE guifg=red
-hi ALEWarningSign ctermbg=NONE ctermfg=yellow guibg=NONE guifg=yellow
-
-
-" ycm
-let g:ycm_global_ycm_extra_conf = g:path_to_dotfiles . '/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_filetype_blacklist = {}	      " enable for .md, .txt
-let g:ycm_auto_trigger = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_enable_diagnostic_signs = 0
-
-
-" indent guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 2
-
-
-" markdown-preview
-let g:mkdp_auto_close = 0
-
-
-" leaderf
-let g:Lf_CacheDirectory = $HOME.'/.cache'
-let g:Lf_DefaultMode = 'FullPath'
-let g:Lf_WindowHeight = 0.3
-let g:Lf_HideHelp = 1
-let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_ShortcutF = '<C-p>'
-let g:Lf_ShortcutB = '<m-n>'
-" " }}}
-
-
-
-" KEYMAPPING " {{{
+" KEYMAPPINGS " {{{
 " leader
 let mapleader=","
 nnoremap \ ,
@@ -197,39 +150,95 @@ nnoremap <silent> <leader><leader>p :set spell!<CR>:set spell?<CR>
 nnoremap <silent> <leader><leader>l :set list!<CR>:set list?<CR>
 
 " highway to $MYVIMRC
-nnoremap <silent> <leader>s :source $MYVIMRC<CR>
-nnoremap <silent> <leader>e :tabnew $MYVIMRC<CR>
+nnoremap <silent> <leader><leader>s :source $MYVIMRC<CR>
+nnoremap <silent> <leader><leader>e :tabnew $MYVIMRC<CR>
 
 " clean search highlights before redraw
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" bash-style cmdline editing shortcut
+" bash-style cmdline editing
 cnoremap <C-a>  <Home>
 cnoremap <C-b>  <Left>
 cnoremap <C-f>  <Right>
 cnoremap <M-b>  <S-Left>
 cnoremap <M-f>  <S-Right>
 " restoring
-cnoremap <C-x>  <C-a>
+cnoremap <C-x>  <C-a> 
+" " }}}
 
-" nerdtree
-nnoremap <silent> <F4> :NERDTreeToggle %:p:h<CR>
 
-" ultisnips
-nnoremap <silent> <leader>ue :UltiSnipsEdit<CR>
-nnoremap <silent> <F3> <Esc>:call UltiSnips#ListSnippets()<CR>
+
+" PLUGIN SETTINGS " {{{
+" coc.nvim
+set shortmess+=c  
+let g:coc_config_home = g:path_to_dotfiles . '/.config/coc'
+let g:coc_data_home = g:path_to_dotfiles . '/.config/coc'
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-clangd',
+      \ 'coc-python',
+      \ 'coc-snippets',
+      \] 
+" suggest
+nmap <silent> <leader>rn <Plug>(coc-rename)
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" jump
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" diagnostic
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" coc-snippets
+nnoremap <silent> <F3> <Esc>:CocList snippets<CR> 
+nnoremap <silent> <leader>ue <Esc>:CocCommand snippets.editSnippets<CR> 
+nnoremap <silent> <leader>uo <Esc>:CocCommand snippets.openSnippetFiles<CR> 
 
 " ale
-nnoremap <silent> <leader>a :ALEToggle<CR>
-nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '»'
+let g:ale_sign_warning = '!'
+nmap <silent> <leader><leader>a <Plug>(ale_toggle)
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+hi ALEErrorSign ctermfg=red guifg=red
+hi ALEWarningSign ctermfg=yellow guifg=yellow 
 
-" ycm
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+" indentLine
+let g:indentLine_enabled = 0
+let g:indentLine_setColors = 0
+let g:indentLine_color_tty_light = 7
+let g:indentLine_color_dark = 1
+let g:indentLine_char = '¦'
+nnoremap <silent> [c :IndentLinesToggle<CR>
 
-" LeaderF
+" leaderf
+let g:Lf_CacheDirectory = $HOME.'/.cache'
+let g:Lf_DefaultMode = 'FullPath'
+let g:Lf_WindowHeight = 0.3
+let g:Lf_HideHelp = 1
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_ShortcutF = '<C-p>'
+let g:Lf_ShortcutB = '<m-n>'
 noremap <c-n> :LeaderfMru<cr>
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tab_count = 0
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#show_close_button = 0
+
+" NERDTree
+nnoremap <silent> <F4> :NERDTreeToggle %:p:h<CR> 
+
+" NERDCommenter
+let g:NERDCustomDelimiters = {
+      \ 'json': { 'left': '//' }
+      \ }
 " " }}}
 
 
@@ -291,85 +300,4 @@ if has("gui_running")
         au GUIEnter * set vb t_vb= lines=30 columns=135
     augroup END
 endif
-" " }}}
-
-
-
-" LAB " {{{
-" StatLine specified for each window
-let g:unknownftstr=' - '
-let g:currentmode={
-      \ 'n'  : 'NORMAL ',
-      \ 'no' : 'PENDIND ',
-      \ 'v'  : 'VISUAL ',
-      \ 'V'  : 'V·LINE ',
-      \ '' : 'V·BLOCK ',
-      \ 's'  : 'SELECT ',
-      \ 'S'  : 'S·LINE ',
-      \ '' : 'S·BLOCK ',
-      \ 'i'  : 'INSERT ',
-      \ 'R'  : 'REPLACE ',
-      \ 'Rv' : 'R·VIRTUAL ',
-      \ 'c'  : 'COMMAND ',
-      \ 'cv' : 'EX·VIM ',
-      \ 'ce' : 'EX·NORMAL ',
-      \ 'r'  : 'PROMPT ',
-      \ 'rm' : 'MORE ',
-      \ 'r?' : 'CONFIRM ',
-      \ '!'  : 'SHELL ',
-      \ 't'  : 'TERMINAL '
-      \} 
-let g:statstyle="%{ColorModeIndicator()}"
-      \. "%6*\ %{g:currentmode[mode()]}"
-      \. "%5*\ %.20f\%r\ "
-      \. "%1*\ %n\ "
-      \. "%4*%="
-      \. "%3*\ %{(&ft!=''?&ft:g:unknownftstr)}\|"
-      \. "%{(&fenc!=''?&fenc:&enc)}\|%{&ff}\ "
-      \. "%2*\ %4(%p%%%)\ "
-      \. "%3l:%-3v"
-
-function! ColorModeIndicator()
-  redrawstatus!
-  if (mode() =~# '\v(n|no)')
-    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=254 
-          \ gui=bold guifg=Black guibg=#e4e4e4'
-  elseif (mode() =~# '\v^[vV]')
-    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=51
-          \ gui=bold guifg=Black guibg=#00ffff'
-  elseif (mode() ==# 'i')
-    exe 'hi! User6 cterm=bold ctermfg=Black ctermbg=46
-          \ gui=bold guifg=Black guibg=#00ff00'
-  endif
-
-  return ''
-endfunction
-" default statline as a 'backup' for first window/tab where no WinEnter event
-" happens
-let &statusline=g:statstyle
-let g:NERDTreeStatusline="%4*%{b:NERDTree.root.path.str()}"
-" statline highlight grp 
-hi StatusLine cterm=bold ctermfg=2 ctermbg=8 
-      \ gui=bold guifg=#757575 guibg=Black
-hi User5 cterm=bold  ctermfg=235 ctermbg=241
-      \ gui=bold guifg=#282828 guibg=#666666
-hi User1 cterm=bold ctermfg=248 ctermbg=238
-      \ gui=bold guifg=#a4a4a4 guibg=#464646
-hi User4 cterm=bold ctermfg=248 ctermbg=234 
-      \ gui=bold guifg=#a4a4a4 guibg=#333333
-hi User3 cterm=bold ctermfg=245 ctermbg=238 
-      \ gui=bold guifg=#888888 guibg=#484848
-hi User2 cterm=bold ctermfg=236 ctermbg=241 
-      \ gui=bold guifg=#353535 guibg=#686868
-hi User7 cterm=bold ctermfg=Black ctermbg=237 
-      \ gui=bold guifg=Black guibg=#333333
-hi User8 cterm=bold ctermfg=235 ctermbg=237 
-      \ gui=bold guifg=#282828 guibg=#333333
-
-augroup WinLocalStatline
-  au!
-  au BufWinEnter,WinEnter * if(&ft!=#'nerdtree') 
-        \| let &l:statusline=g:statstyle 
-  au WinLeave * if(&ft!=#'nerdtree') | let &l:statusline="%7*\ %="
-augroup END 
-" " }}}
+" " }}} 
