@@ -13,7 +13,7 @@ autoload/plug.vim*
 # coc data
 .config/coc/*
 !.config/coc/coc-settings.json
-!.config/coc/ultisnips/*
+!.config/coc/ultisnips/
 
 # deprecated
 bundle/
