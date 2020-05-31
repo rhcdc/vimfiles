@@ -18,7 +18,7 @@ exec "call plug#begin('".g:path_to_dotfiles."/plugged')"
 
 " misc
 Plug 'tpope/vim-surround'
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'vim-airline/vim-airline'
@@ -31,6 +31,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " finder
 Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
 
+" conditional loading
+if has("win32") && has("gui_running")
+  Plug 'ruedigerha/vim-fullscreen'
+endif 
 call plug#end()
 " " }}}
 
@@ -271,7 +275,7 @@ augroup END
 " GUI " {{{
 if has("gui_running") 
     " font
-    set guifont=Consolas:h11.5
+    set guifont=Source\ Code\ Pro\ Bold\ 12,Consolas:h12:b
 
     " caret no blink
     set guicursor=a:block-blinkon0
@@ -297,7 +301,7 @@ if has("gui_running")
     augroup guienter
         au!
         " set GUI window's init gui interfaces
-        au GUIEnter * set vb t_vb= lines=30 columns=135
+        au GUIEnter * set vb t_vb= lines=30 columns=100
     augroup END
 endif
 " " }}} 
