@@ -79,7 +79,7 @@ set autoindent
 set smartindent
 
 " silent the bell/vbell
-set novisualbell t_vb=
+set visualbell t_vb=
 
 " boost redrawing
 set lazyredraw
@@ -184,10 +184,18 @@ let g:coc_global_extensions = [
       \ 'coc-snippets',
       \] 
 " suggest
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>" 
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+" jump && action
 nmap <silent> <leader>rn <Plug>(coc-rename)
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-" jump
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -252,7 +260,7 @@ let g:NERDCustomDelimiters = {
 augroup vimscript
   au!
   " auto-reload vimrc after writen
-  au BufWritePost $MYVIMRC source $MYVIMRC
+  au BufWritePost $MYVIMRC source % | AirlineRefresh
 augroup END
 
 " markdown
@@ -292,10 +300,10 @@ if has("gui_running")
     set guioptions+=c
 
     " tab nav
-    nnoremap <C-S-tab> :tabprevious<CR>
-    nnoremap <C-tab>   :tabnext<CR>
-    inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-    inoremap <C-tab>   <Esc>:tabnext<CR>i
+    nnoremap <silent><C-S-tab> :tabprevious<CR>
+    nnoremap <silent><C-tab>   :tabnext<CR>
+    inoremap <silent><C-S-tab> <Esc>:tabprevious<CR>i
+    inoremap <silent><C-tab>   <Esc>:tabnext<CR>i
 
     " GUI entering
     augroup guienter
