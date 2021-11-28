@@ -13,9 +13,7 @@ autoload/plug.vim*
 
 # coc data
 .config/coc/*
-!.config/coc/coc-settings.json
 !.config/coc/ultisnips/
 
 # deprecated
 bundle/
-.ycm_extra_conf.py
